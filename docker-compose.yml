@@ -13,9 +13,9 @@ services:
             MYSQL_PASSWORD: symfony
 
     php:
-        build: ./docker/php-fpm
+        build: ./docker/php
         ports:
-            - "9000:9001"
+            - "9000:9000"
         volumes:
             - ./project:/var/www/app
             - ./docker/logs/symfony:/var/www/app/var/log

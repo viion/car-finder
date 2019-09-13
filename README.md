@@ -18,6 +18,10 @@ Build and run the docker
 
 Add to your hosts file: `127.0.0.1 car.local`
 
+## Running a command
+
+- docker-compose --run php bin/cli app:test
+
 ## XDebug
 
 - IDE Key: PHPSTORM
@@ -25,3 +29,4 @@ Add to your hosts file: `127.0.0.1 car.local`
 - Port: `5902`
 - Host: `docker-host.localhost`
 - Use Docker container for PHP Cli Interpreter.
+
