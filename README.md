@@ -20,7 +20,8 @@ Add to your hosts file: `127.0.0.1 car.local`
 
 ## Running a command
 
-- docker-compose --run php bin/cli app:test
+- docker-compose exec php php bin/console xxxx
+- ./bin/command app:test
 
 ## XDebug
 
