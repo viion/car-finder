@@ -1,8 +1,8 @@
 import { HashRouter as Router, Route, NavLink, Redirect } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 
-import Home from "./pages/home";
-import TestPage from "./pages/test-page";
+import Cars from "./pages/cars";
+import Alerts from "./pages/alerts";
 
 export default function Routing() {
     useEffect(() => {
@@ -13,19 +13,24 @@ export default function Routing() {
         <div className="site">
             <Router>
                 <nav>
-                    <NavLink to="/" className="nav-link">
-                        Home
+                    <NavLink to="/">
+                        Cars
                     </NavLink>
-                    <NavLink to="/test" className="nav-link">
-                        Test
+                    <NavLink to="/alerts">
+                        Alerts
                     </NavLink>
                 </nav>
                 <main>
-                    <Route exact path="/" component={Home} />
                     <Route exact
-                           path="/test"
+                           path="/"
                            render={
-                               (props) => <TestPage {...props} />
+                               (props) => <Cars {...props} />
+                           }
+                    />
+                    <Route exact
+                           path="/alerts"
+                           render={
+                               (props) => <Alerts {...props} />
                            }
                     />
                 </main>

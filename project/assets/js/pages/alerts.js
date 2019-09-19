@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function Home() {
+export default function Alerts() {
     return (
         <div>
-            <h1>Home</h1>
+            <h1>Alerts</h1>
             <p>
-                home
+                <input typeof="text" />
             </p>
         </div>
     )

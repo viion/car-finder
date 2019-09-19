@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="/styles.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet">
+    <link href="/styles.css?t=v{{ "now"|date('u') }}" rel="stylesheet" type="text/css">
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
 
-<main class="container">
+<main>
     {% block body %}
-
     {% endblock %}
 </main>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/app.js"></script>
+<script src="/app.js?t=v{{ "now"|date('u') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

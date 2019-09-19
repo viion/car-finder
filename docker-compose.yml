@@ -1,28 +1,17 @@
 version: '3.7'
 
 services:
-    db:
-        image: mysql
-        command: ["--default-authentication-plugin=mysql_native_password"]
-        ports:
-            - "3306:3306"
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: symfony
-            MYSQL_USER: symfony
-            MYSQL_PASSWORD: symfony
-
     php:
         build: ./docker/php
         ports:
             - "9000:9000"
         volumes:
-            - ./project:/var/www/app
-            - ./docker/logs/symfony:/var/www/app/var/log
+            - ./project:/var/www/app:consistent
+            - ./docker/logs/symfony:/var/www/app/var/log:consistent
         links:
-            - db
+            - mysql
         extra_hosts:
-            - "car.localhost:10.3.4.77"
+            - "car.localhost:192.168.1.69"
 
     nginx:
         build: ./docker/nginx
@@ -31,11 +20,13 @@ services:
         links:
             - php
         volumes:
-            - ./project:/var/www/app
-            - ./docker/logs/nginx:/var/log/nginx
+            - ./project:/var/www/app:consistent
+            - ./docker/logs/nginx:/var/log/nginx:consistent
     mysql:
         image: mysql
         command: --default-authentication-plugin=mysql_native_password
+        ports:
+          - "3306:3306"
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: test

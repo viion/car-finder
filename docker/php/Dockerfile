@@ -6,6 +6,11 @@ FROM php:7.3-fpm
 RUN apt-get update && apt-get upgrade -y
 
 #
+# Extensions
+#
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+#
 # Cache + Composer
 #
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/* && \
