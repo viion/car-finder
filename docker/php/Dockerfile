@@ -3,18 +3,17 @@ FROM php:7.3-fpm
 #
 # Update
 #
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y && rm -rf m -rf /var/lib/apt/lists/*
 
 #
 # Extensions
 #
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql && rm -rf /tmp/*
 
 #
-# Cache + Composer
+# Composer
 #
-RUN rm -rf /var/cache/apk/* && rm -rf /tmp/* && \
-    curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
+COPY --from composer:latest /usr/bin/composer /usr/bin/composer
 
 #
 # Copy config
@@ -28,3 +27,4 @@ WORKDIR /var/www/app
 EXPOSE 9000
 
 CMD ["php-fpm"]
+
