@@ -81,9 +81,7 @@ class DefaultController extends AbstractController
         $this->em->persist($car);
         $this->em->flush();
     
-        return $this->redirectToRoute('car', [
-            'car' => $car->getId()
-        ]);
+        return $this->redirectToRoute('home');
     }
     
     /**
