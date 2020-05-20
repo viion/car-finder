@@ -114,7 +114,7 @@ class AutoTraderParser extends HttpService
                 $this->discord->sendMessage(712787184108830726, null, [
                     'title' => $car->getTitle(),
                     'description' => null,
-                    'url' => "http://audi.local/car/{$car->getId()}",
+                    'url' => "http://tts.viion.co.uk/car/{$car->getId()}",
                     'color' => hexdec('75f542'),
                     'image' => [
                         'url' => $car->getImages()[0] ?? 'https://www.autotrader.co.uk/images/noimage/no_image_266x200.png'
