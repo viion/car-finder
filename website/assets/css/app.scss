@@ -1,0 +1,234 @@
+body {
+    background-color: #222;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #ccc;
+}
+
+a {
+    text-decoration: none;
+    color: #0072ff;
+
+    &:hover {
+        color: #005da9;
+    }
+}
+
+main, header, footer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+main {
+
+}
+
+header, footer {
+    text-align: center;
+    font-size: 14px;
+    padding: 30px;
+    color: #888;
+}
+
+footer {
+    text-align: left;
+
+    ul {
+        li {
+            padding-left: 15px;
+            font-size: 13px;
+            line-height: 20px;
+        }
+    }
+}
+
+nav {
+
+}
+
+.btn, .btn2 {
+    display: inline-block;
+    background: rgb(0,103,207);
+    background: linear-gradient(0deg, rgba(0,103,207,1) 0%, rgba(0,116,255,1) 100%);
+    box-shadow: 0 2px 0 #000;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 100ms;
+    padding: 8px 12px;
+
+    &:hover {
+        color: #fff;
+        cursor: pointer;
+        background: rgb(0,88,176);
+        background: linear-gradient(0deg, rgba(0,88,176,1) 0%, rgba(0,103,227,1) 100%);
+    }
+}
+
+.btn2 {
+    background: rgb(32,32,32);
+    background: linear-gradient(0deg, rgba(32,32,32,1) 0%, rgba(51,51,51,1) 100%);
+
+    &:hover {
+        background: rgb(32,32,32);
+        background: linear-gradient(0deg, rgba(32,32,32,1) 0%, rgba(51,51,51,1) 100%);
+    }
+}
+
+.car-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .car-title {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 5px;
+        color: #aaa;
+    }
+
+    > a {
+        flex: 0 1 calc(50% - 30px);
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 15px;
+        background-color: #111;
+        color: #fff;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        transition: 150ms;
+
+        &:hover {
+            box-shadow: 0 1px 10px rgba(0,0,0,1);
+            transform: scale(1.25);
+            z-index: 5;
+        }
+
+        .car-new {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-weight: 700;
+            font-size: 14px;
+            color: #000000;
+            background-color: #00ff3c;
+            padding: 10px;
+            box-shadow: 0 1px 10px rgba(0,0,0,0.6);
+            border-radius: 0 0 0 5px;
+        }
+
+        .car-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #111;
+            color: #fff;
+            font-weight: 400;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+.car-page {
+    background-color: #111;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+
+    h1 {
+        color: #fff;
+        font-size: 22px;
+        font-weight: 300;
+        margin: 0 0 10px 0;
+    }
+
+    h2 {
+        color: #e9ff34;
+        font-size: 32px;
+        font-weight: 400;
+        margin: 0 0 20px 0;
+    }
+
+    h3 {
+        color: #888;
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    hr {
+        background-color: #424242;
+        height: 3px;
+        border: none;
+        margin: 50px 0;
+    }
+
+    .car-description {
+        font-size: 14px;
+        line-height: 20px;
+        max-width: 90%;
+    }
+
+    .car-images {
+        display: flex;
+        flex-wrap: wrap;
+
+        > a {
+            position: relative;
+            display: block;
+            flex: 0 1 calc(25% - 10px);
+            margin: 5px;
+            height: 140px;
+            overflow: hidden;
+            background-size: 100% auto;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: 150ms;
+
+            &:hover {
+                transform: scale(1.25);
+                z-index: 5;
+            }
+        }
+    }
+}
+
+.car-table {
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #333;
+
+    small {
+        font-size: 14px;
+        color: #888;
+        display: block;
+        margin-top: 8px;
+    }
+
+    tr {
+        td {
+            padding: 10px;
+            border-bottom: solid 1px #000;
+
+            &:first-of-type {
+                border-right: solid 1px #000;
+                color: #fff29b;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+.car-banner {
+    height: 400px;
+    background-position: center;
+    background-size: 100% auto;
+    margin: 20px -20px 0 -20px;
+}

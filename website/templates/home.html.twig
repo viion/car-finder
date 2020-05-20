@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="car-list">
+        {% for car in cars %}
+            {% set image = car.images[0] is defined ? car.images[0] : "https://www.autotrader.co.uk/images/2/fpa_no_images.png" %}
+            <a href="{{ path('car', { car: car.id }) }}">
+                <span class="car-info">
+                    <span class="car-title">
+                        {{ car.title }}
+                    </span>
+                    £{{ car.price|number_format }} - {{ car.score }}/100
+                </span>
+                {% if not car.seen %}
+                    <span class="car-new">NEW</span>
+                {% endif %}
+                <img src="{{ image }}">
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="car-page">
+
+        <a class="btn2" href="{{ path('home') }}">← Go Back</a>
+
+        {% if car.images %}
+            <div class="car-banner" style="background-image: url({{ car.images[0] }})"></div>
+        {% endif %}
+
+        <br/><br/>
+
+        <h1>{{ car.title }}</h1>
+        <h2>£ {{ car.price|number_format }}</h2>
+
+        <a class="btn" href="{{ path('car_hide', { car: car.id }) }}">{{ car.hidden ? 'Show' : 'Hide' }} Car</a>
+
+        <br/><br/><br/>
+
+        <h3>AutoTrader Link</h3>
+
+        <a href="https://www.autotrader.co.uk/classified/advert/{{ car.siteId }}" target="_blank">
+            https://www.autotrader.co.uk/classified/advert/{{ car.siteId }}
+        </a>
+
+        <br/><br/><br/>
+
+        <h3>Information</h3>
+
+        <table class="car-table">
+            <tr>
+                <td width="25%">Added</td>
+                <td>{{ car.added|date('F j, Y, g:i a', "Europe/London") }}</td>
+            </tr>
+            <tr>
+                <td width="25%">Score</td>
+                <td>
+                    {{ car.score|number_format }} / 100
+                    <small>
+                        {% for field, score in car.scoredata %}
+                            [{{ field }}: {{ score }}]
+                        {% endfor %}
+                    </small>
+                </td>
+            </tr>
+            <tr>
+                <td>Price Valuation</td>
+                <td>{{ car.priceValuation|title }}</td>
+            </tr>
+            <tr>
+                <td>Year</td>
+                <td>{{ car.year }}</td>
+            </tr>
+            <tr>
+                <td>Miles</td>
+                <td>{{ car.miles|number_format }}</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td>{{ car.tax }}</td>
+            </tr>
+            <tr>
+                <td>Check Status</td>
+                <td>{{ car.checkStatus }}</td>
+            </tr>
+            <tr>
+                <td>Seller</td>
+                <td>
+                    {{ car.sellerName }}
+                    <small>
+                        Rating: {{ car.sellerRating }} ({{ car.sellerReviews }})
+                    </small>
+                </td>
+            </tr>
+        </table>
+
+        <br/><br/><br/>
+
+        <h3>Description</h3>
+        <p class="car-description">
+            {{ car.description|raw }}
+        </p>
+
+        <br/><br/><br/>
+
+        <div class="car-images">
+            {% for image in car.images %}
+                <a href="{{ image }}" target="_blank" style="background-image: url({{ image }})"></a>
+            {% else %}
+                <h5>(Car has no images...)</h5>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

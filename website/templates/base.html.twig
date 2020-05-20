@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Audi TTS{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,500,600,700&display=swap" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet">
+        <link href="/styles.css?t=v{{ "now"|date('u') }}" rel="stylesheet" type="text/css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+
+    <header>
+        {% include "header.html.twig" %}
+    </header>
+
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer>
+        {% include "footer.html.twig" %}
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/app.js?t=v{{ "now"|date('u') }}"></script>
+    {% block javascripts %}{% endblock %}
+    </body>
+</html>

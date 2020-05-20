@@ -1,0 +1,1 @@
+{"virtualbox":{"/stack":{"guestpath":"/stack","hostpath":"D:/Web/car-finder","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/Web/car-finder/stack","disabled":false,"__vagrantfile":true}}}
