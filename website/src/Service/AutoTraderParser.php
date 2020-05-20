@@ -228,13 +228,16 @@ class AutoTraderParser extends HttpService
         $scoredata = [];
         
         //
-        // Price
+        // Price (max: 50 pts)
         //
         $brackets = [
-            50 => 12000,
-            35 => 13500,
-            15 => 15000,
-            5  => 18000
+            50 => 22000,
+            45 => 23000,
+            42 => 24000,
+            40 => 25000,
+            38 => 27000,
+            35 => 28500,
+            30 => 30000,
         ];
         
         foreach ($brackets as $points => $value) {
@@ -246,13 +249,14 @@ class AutoTraderParser extends HttpService
     
     
         //
-        // Miles
+        // Miles (max: 35 pts)
         //
         $brackets = [
-            50 => 20000,
-            30 => 40000,
-            20 => 55000,
-            10 => 65000
+            35 => 5000,
+            32 => 10000,
+            30 => 15000,
+            28 => 20000,
+            15 => 30000
         ];
     
         foreach ($brackets as $points => $value) {
@@ -263,96 +267,18 @@ class AutoTraderParser extends HttpService
         }
     
         //
-        // Valuation
+        // Year (max: 15 pts)
         //
         $brackets = [
-            20 => 'low',
-            10 => 'good',
-        ];
-    
-        foreach ($brackets as $points => $value) {
-            if ($car->getPriceValuation() == $value) {
-                $scoredata['Valuation'] = $points;
-                break;
-            }
-        }
-    
-        //
-        // Year
-        //
-        $brackets = [
-            50 => 2019,
-            30 => 2018,
-            20 => 2017,
-            15 => 2016,
-            10 => 2015,
-            5  => 2014,
+            15 => 2019,
+            14 => 2018,
+            13 => 2017,
+            12 => 2016,
         ];
     
         foreach ($brackets as $points => $value) {
             if ($car->getPriceValuation() == $value) {
                 $scoredata['Year'] = $points;
-                break;
-            }
-        }
-        
-        //
-        // Tax
-        //
-        $brackets = [
-            25 => 30,
-            20 => 40,
-            15 => 80,
-            10 => 120,
-            5  => 200,
-        ];
-    
-        foreach ($brackets as $points => $value) {
-            if ($car->getTax() <= $value) {
-                $scoredata['Miles'] = $points;
-                break;
-            }
-        }
-    
-        //
-        // Fuel
-        //
-        $brackets = [
-            10 => 'Patrol',
-            5  => 'Diesel',
-        ];
-    
-        foreach ($brackets as $points => $value) {
-            if ($car->getGearbox() == $value) {
-                $scoredata['Gear'] = $points;
-                break;
-            }
-        }
-    
-        //
-        // Engine Size
-        //
-        $brackets = [
-            5 => '2.0',
-        ];
-    
-        foreach ($brackets as $points => $value) {
-            if ($car->getEngineSize() == $value) {
-                $scoredata['EngineSize'] = $points;
-                break;
-            }
-        }
-    
-        //
-        // Checks Passed
-        //
-        $brackets = [
-            5 => 'PASSED',
-        ];
-    
-        foreach ($brackets as $points => $value) {
-            if ($car->getCheckStatus() == $value) {
-                $scoredata['CheckStatus'] = $points;
                 break;
             }
         }
