@@ -277,7 +277,7 @@ class AutoTraderParser extends HttpService
         ];
     
         foreach ($brackets as $points => $value) {
-            if ($car->getPriceValuation() == $value) {
+            if ($car->getYear() == $value) {
                 $scoredata['Year'] = $points;
                 break;
             }
