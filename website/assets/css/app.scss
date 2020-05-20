@@ -7,10 +7,10 @@ body {
 
 a {
     text-decoration: none;
-    color: #0072ff;
+    color: #00b9ff;
 
     &:hover {
-        color: #005da9;
+        color: #008de2;
     }
 }
 
@@ -28,6 +28,10 @@ header, footer {
     font-size: 14px;
     padding: 30px;
     color: #888;
+}
+
+header {
+    line-height: 22px;
 }
 
 footer {

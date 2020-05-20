@@ -8,9 +8,9 @@
             <a href="{{ path('car', { car: car.id }) }}">
                 <span class="car-info">
                     <span class="car-title">
-                        {{ car.title }}
+                        {{ car.title }} - {{ car.added|date('F j', "Europe/London")|upper }}
                     </span>
-                    £{{ car.price|number_format }} - {{ car.score }}/100
+                    £{{ car.price|number_format }} <span style="opacity: 0.6;">- {{ car.score }}/100</span>
                 </span>
                 {% if not car.seen %}
                     <span class="car-new">NEW</span>

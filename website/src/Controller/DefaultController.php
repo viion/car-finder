@@ -32,24 +32,37 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request)
     {
-        $log = $this->parser->getLog();
-        
-        $cars = $this->repository->findby(
-            [
-                'hidden' => false,
-            ],
-            [
-                //'score' => 'desc',
+        $sort = [
+            'default' => [
                 'price' => 'desc',
                 'added' => 'desc',
             ],
-            50,
-            $request->get('offset') ?: 0
-        );
+            'added' => [
+                'added' => 'desc',
+            ],
+            'price' => [
+                'price' => 'desc',
+            ],
+            'score' => [
+                'score' => 'desc',
+            ]
+        ];
+    
+        $sortReq = $request->get('sort', 'default');
+        $sort = $sort[$sortReq];
+        
+        $filter = [
+            'hidden' => false,
+        ];
+        
+        $log = $this->parser->getLog();
+        
+        $cars = $this->repository->findby($filter, $sort, 100, $request->get('offset') ?: 0);
         
         return $this->render('home.html.twig', [
             'cars' => $cars,
             'log' => $log,
+            'sort' => $sortReq
         ]);
     }
     
