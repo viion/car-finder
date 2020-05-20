@@ -140,9 +140,6 @@ footer {
       background-position: center;
       background-repeat: no-repeat;
       transition: 150ms; }
-      .car-page .car-images > a:hover {
-        transform: scale(1.25);
-        z-index: 5; }
 
 .car-table {
   width: 100%;

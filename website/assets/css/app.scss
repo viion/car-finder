@@ -190,11 +190,6 @@ nav {
             background-position: center;
             background-repeat: no-repeat;
             transition: 150ms;
-
-            &:hover {
-                transform: scale(1.25);
-                z-index: 5;
-            }
         }
     }
 }
