@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AutoTraderParser extends HttpService
 {
-    const DISCORD = FALSE;
+    const DISCORD = true;
     
     const ENDPOINT        = 'https://www.autotrader.co.uk';
     const ENDPOINT_SEARCH = '/car-search';
@@ -113,52 +113,55 @@ class AutoTraderParser extends HttpService
             }
     
             $car = $this->parseListingPage($id, $car);
-            $newResults++;
-    
-            $this->log[] = "New Car: {$id}";
             
-            if (self::DISCORD) {
-                $this->discord->sendMessage(712787184108830726, null, [
-                    'title' => $car->getTitle(),
-                    'description' => null,
-                    'url' => "http://tts.viion.co.uk/car/{$car->getId()}",
-                    'color' => hexdec('75f542'),
-                    'image' => [
-                        'url' => $car->getImages()[0] ?? 'https://www.autotrader.co.uk/images/noimage/no_image_266x200.png'
-                    ],
-                    'fields' => [
-                        [
-                            'name' => 'Price',
-                            'value' => number_format($car->getPrice()),
-                            'inline' => true,
+            if ($car) {
+                $newResults++;
+    
+                $this->log[] = "New Car: {$id}";
+    
+                if (self::DISCORD) {
+                    $this->discord->sendMessage(712787184108830726, null, [
+                        'title' => $car->getTitle(),
+                        'description' => null,
+                        'url' => "http://tts.viion.co.uk/car/{$car->getId()}",
+                        'color' => hexdec('75f542'),
+                        'image' => [
+                            'url' => $car->getImages()[0] ?? 'https://www.autotrader.co.uk/images/noimage/no_image_266x200.png'
                         ],
-                        [
-                            'name' => 'Price Evaluation',
-                            'value' => ucwords($car->getPriceValuation()),
-                            'inline' => true,
-                        ],
-                        [
-                            'name' => 'Score',
-                            'value' => $car->getScore() . " / 100",
-                            'inline' => true,
-                        ],
-                        [
-                            'name' => 'Year',
-                            'value' => $car->getYear(),
-                            'inline' => true,
-                        ],
-                        [
-                            'name' => 'Miles',
-                            'value' => number_format( $car->getMiles()),
-                            'inline' => true,
-                        ],
-                        [
-                            'name' => 'Check Status',
-                            'value' => ucwords($car->getCheckStatus()),
-                            'inline' => true,
+                        'fields' => [
+                            [
+                                'name' => 'Price',
+                                'value' => number_format($car->getPrice()),
+                                'inline' => true,
+                            ],
+                            [
+                                'name' => 'Price Evaluation',
+                                'value' => ucwords($car->getPriceValuation()),
+                                'inline' => true,
+                            ],
+                            [
+                                'name' => 'Score',
+                                'value' => $car->getScore() . " / 100",
+                                'inline' => true,
+                            ],
+                            [
+                                'name' => 'Year',
+                                'value' => $car->getYear(),
+                                'inline' => true,
+                            ],
+                            [
+                                'name' => 'Miles',
+                                'value' => number_format( $car->getMiles()),
+                                'inline' => true,
+                            ],
+                            [
+                                'name' => 'Check Status',
+                                'value' => ucwords($car->getCheckStatus()),
+                                'inline' => true,
+                            ]
                         ]
-                    ]
-                ]);
+                    ]);
+                }
             }
         }
         
@@ -194,6 +197,11 @@ class AutoTraderParser extends HttpService
         $response = $this->fetch($url);
         $this->console->writeln("Status Code: <comment>{$response->code}</comment>");
         $json = json_decode($response->html);
+        
+        // ignore cars above our search price
+        if ($json->pageData->tracking->vehicle_price > self::SEARCH_QUERIES['price-to']) {
+            return false;
+        }
    
         //
         // Time to get all the data!
