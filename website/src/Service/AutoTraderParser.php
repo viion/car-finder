@@ -92,6 +92,13 @@ class AutoTraderParser extends HttpService
         
         /** @var DomQuery $li */
         foreach ($this->dom->find('.search-page__result') as $li) {
+            $isPromoted = $li->data('data-is-promoted-listing');
+            
+            // skip promotional entries
+            if ($isPromoted && $isPromoted == 'true') {
+                continue;
+            }
+            
             $link = trim($li->find('.listing-fpa-link')->attr('href'));
             $link = explode('?', $link)[0];
             
