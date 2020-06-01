@@ -11,10 +11,9 @@ a {
     color: #008de2; }
 
 main, header, footer {
-  max-width: 1200px;
-  margin: 0 auto; }
+  margin: 20px; }
 
-header, footer {
+footer {
   text-align: center;
   font-size: 14px;
   padding: 30px;
@@ -63,7 +62,7 @@ footer {
     margin-bottom: 5px;
     color: #aaa; }
   .car-list > a {
-    flex: 0 1 calc(50% - 30px);
+    flex: 0 1 calc(20% - 30px);
     position: relative;
     border-radius: 5px;
     overflow: hidden;
@@ -103,7 +102,9 @@ footer {
   background-color: #111;
   border-radius: 10px;
   padding: 20px;
-  color: #fff; }
+  color: #fff;
+  max-width: 1000px;
+  margin: 0 auto; }
   .car-page h1 {
     color: #fff;
     font-size: 22px;
@@ -126,6 +127,7 @@ footer {
     border: none;
     margin: 50px 0; }
   .car-page .car-description {
+    color: #c5e7ff;
     font-size: 14px;
     line-height: 20px;
     max-width: 90%; }
@@ -168,15 +170,33 @@ footer {
   background-size: 100% auto;
   margin: 20px -20px 0 -20px; }
 
+.car-list-bar {
+  margin: 10px 15px;
+  border: solid 1px #555;
+  border-radius: 5px;
+  font-size: 13px; }
+  .car-list-bar > span {
+    padding: 10px;
+    display: inline-block;
+    border-right: solid 1px #555; }
+
 @media only screen and (max-width: 600px) {
+  main, header, footer {
+    margin: 2px; }
   .car-list a {
     flex: 0 1 100%;
     margin: 0 20px 30px 20px; }
     .car-list a:hover {
       transform: scale(1);
       z-index: 5; }
+  .car-list-bar > span {
+    display: block;
+    border-right: none;
+    border-bottom: solid 1px #555; }
+    .car-list-bar > span:last-of-type {
+      border-bottom: none; }
   .car-page {
-    margin: 0 20px; }
+    margin: 10px; }
     .car-page .car-banner {
       height: 100px;
       background-repeat: no-repeat;

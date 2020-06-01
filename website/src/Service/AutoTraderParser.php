@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AutoTraderParser extends HttpService
 {
-    const DISCORD = true;
+    const DISCORD = false;
     
     const ENDPOINT        = 'https://www.autotrader.co.uk';
     const ENDPOINT_SEARCH = '/car-search';
@@ -174,6 +174,9 @@ class AutoTraderParser extends HttpService
         ]));
     }
     
+    /**
+     * Get recent parse log
+     */
     public function getLog()
     {
         $log = json_decode(file_get_contents(__DIR__ .'/log.log'));
@@ -196,6 +199,16 @@ class AutoTraderParser extends HttpService
         $this->console->writeln("GET: <info>{$url}</info>");
         $response = $this->fetch($url);
         $this->console->writeln("Status Code: <comment>{$response->code}</comment>");
+        
+        if ($response->code != 200) {
+            $car->setNotes('Car hidden/removed as it did not return 200 response, which might mean its listing has been removed');
+    
+            $this->em->persist($car);
+            $this->em->flush();
+            
+            return $car;
+        }
+        
         $json = json_decode($response->html);
         
         // ignore cars above our search price
@@ -228,6 +241,8 @@ class AutoTraderParser extends HttpService
         $scoredata = $this->score($car);
         $car->setScore(array_sum($scoredata))
             ->setScoredata($scoredata);
+        
+        $car->setHash();
         
         $this->em->persist($car);
         $this->em->flush();

@@ -34,6 +34,11 @@ class Car
      * @ORM\Column(type="integer")
      */
     private $added;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=64)
+     */
+    private $hash;
 
     // -- CAR --
     
@@ -46,7 +51,7 @@ class Car
      * @var string
      * @ORM\Column(type="text")
      */
-    private $scoredata = 0;
+    private $scoredata = '';
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
@@ -132,6 +137,16 @@ class Car
      * @ORM\Column(type="boolean", length=10)
      */
     private $seen = false;
+    /**
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    private $notes = '';
+    /**
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    private $previousdata = '';
     
     public function __construct()
     {
@@ -148,6 +163,45 @@ class Car
         $data['images'] = json_decode($data['images']);
         $data['scoredata'] = json_decode($data['scoredata']);
         return $data;
+    }
+    
+    public function setHash()
+    {
+        $this->hash = sha1(implode('_', [
+            $this->siteId,
+            $this->title,
+            $this->description,
+            $this->images,
+            $this->price,
+            $this->year,
+            $this->tax,
+            $this->fuel,
+            $this->miles,
+            $this->gearbox,
+            $this->engineSize,
+            $this->checkStatus,
+            $this->sellerName,
+            $this->sellerRating,
+        ]));
+        
+        return $this;
+    }
+    
+    public function getHash(): string
+    {
+        return $this->hash;
+    }
+    
+    public function getPreviousdata(): string
+    {
+        return json_decode($this->previousdata);
+    }
+    
+    public function setPreviousdata(string $previousdata)
+    {
+        $this->previousdata = $previousdata;
+        
+        return $this;
     }
     
     public function getId(): string
@@ -420,6 +474,18 @@ class Car
     public function setSeen(bool $seen)
     {
         $this->seen = $seen;
+        
+        return $this;
+    }
+    
+    public function getNotes(): string
+    {
+        return $this->notes;
+    }
+    
+    public function setNotes(string $notes)
+    {
+        $this->notes = $notes;
         
         return $this;
     }

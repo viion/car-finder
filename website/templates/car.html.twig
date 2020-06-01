@@ -12,6 +12,12 @@
 
         <br/><br/>
 
+        {% if car.hidden %}
+        <div>
+            This car is hidden from search results and will no longer update!!
+        </div>
+        {% endif %}
+
         <h1>{{ car.title }}</h1>
         <h2>£ {{ car.price|number_format }}</h2>
 
@@ -30,6 +36,12 @@
         <h3>Information</h3>
 
         <table class="car-table">
+            <tr>
+                <td>Description</td>
+                <td class="car-description">
+                    {{ car.description|raw }}
+                </td>
+            </tr>
             <tr>
                 <td width="25%">Added</td>
                 <td>{{ car.added|date('F j, Y, g:i a', "Europe/London") }}</td>
@@ -74,14 +86,11 @@
                     </small>
                 </td>
             </tr>
+            <tr>
+                <td>Notes</td>
+                <td>{{ car.notes ? car.notes : '(none)' }}</td>
+            </tr>
         </table>
-
-        <br/><br/><br/>
-
-        <h3>Description</h3>
-        <p class="car-description">
-            {{ car.description|raw }}
-        </p>
 
         <br/><br/><br/>
 
