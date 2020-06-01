@@ -185,6 +185,18 @@ footer {
     display: inline-block;
     border-right: solid 1px #555; }
 
+@media only screen and (max-width: 1500px) {
+  .car-list a {
+    flex: 0 1 calc(25% - 30px); } }
+
+@media only screen and (max-width: 1000px) {
+  .car-list a {
+    flex: 0 1 calc(33% - 30px); } }
+
+@media only screen and (max-width: 750px) {
+  .car-list a {
+    flex: 0 1 calc(50% - 30px); } }
+
 @media only screen and (max-width: 600px) {
   main, header, footer {
     margin: 2px; }
