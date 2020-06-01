@@ -62,8 +62,8 @@ class AutoTraderUpdater extends HttpService
                 
                 if (AutoTraderParser::DISCORD) {
                     $this->discord->sendMessage(712787184108830726, null, [
-                        'title' => "(UPDATED)" . $car->getTitle(),
-                        'description' => "This listing has been updated with new/changed information",
+                        'title' => "UPDATED!!! -- " . $car->getTitle(),
+                        'description' => "This listing has been updated with new/changed information.",
                         'url' => "http://tts.viion.co.uk/car/{$car->getId()}",
                         'color' => hexdec('75f542'),
                         'image' => [
@@ -76,30 +76,10 @@ class AutoTraderUpdater extends HttpService
                                 'inline' => true,
                             ],
                             [
-                                'name' => 'Price Evaluation',
-                                'value' => ucwords($car->getPriceValuation()),
-                                'inline' => true,
-                            ],
-                            [
-                                'name' => 'Score',
-                                'value' => $car->getScore() . " / 100",
-                                'inline' => true,
-                            ],
-                            [
-                                'name' => 'Year',
-                                'value' => $car->getYear(),
-                                'inline' => true,
-                            ],
-                            [
                                 'name' => 'Miles',
                                 'value' => number_format($car->getMiles()),
                                 'inline' => true,
                             ],
-                            [
-                                'name' => 'Check Status',
-                                'value' => ucwords($car->getCheckStatus()),
-                                'inline' => true,
-                            ]
                         ]
                     ]
                     );
