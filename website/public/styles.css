@@ -131,6 +131,11 @@ footer {
     font-size: 14px;
     line-height: 20px;
     max-width: 90%; }
+  .car-page .car-notes {
+    color: #ff9297;
+    font-size: 14px;
+    line-height: 20px;
+    max-width: 90%; }
   .car-page .car-images {
     display: flex;
     flex-wrap: wrap; }

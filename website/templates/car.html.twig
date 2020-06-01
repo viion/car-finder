@@ -37,6 +37,10 @@
 
         <table class="car-table">
             <tr>
+                <td width="25%">NOTES</td>
+                <td class="car-notes">{{ car.notes ? car.notes : '(none)' }}</td>
+            </tr>
+            <tr>
                 <td>Description</td>
                 <td class="car-description">
                     {{ car.description|raw }}
@@ -85,10 +89,6 @@
                         Rating: {{ car.sellerRating }} ({{ car.sellerReviews }})
                     </small>
                 </td>
-            </tr>
-            <tr>
-                <td>Notes</td>
-                <td>{{ car.notes ? car.notes : '(none)' }}</td>
             </tr>
         </table>
 
