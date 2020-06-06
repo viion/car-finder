@@ -85,7 +85,7 @@ class DefaultController extends AbstractController
     }
     
     /**
-     * @Route("/car/{car}/hide", name="car_hide")
+     * @Route("/car/{car}/hidethecar", name="car_hide")
      */
     public function carHide(Car $car)
     {
