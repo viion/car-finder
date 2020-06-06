@@ -37,7 +37,6 @@ class AutoTraderUpdater extends HttpService
         // Find all fave characters
         $cars = $this->repository->findBy([
             'deleted' => false,
-            'fave' => true
         ]);
         
         /** @var Car $car */
@@ -55,10 +54,9 @@ class AutoTraderUpdater extends HttpService
             
             if ($lastHash != $newHash && !$car->isDeleted()) {
                 $this->console->writeln("!!! New Changes!");
-                
                 $car->setNotes("Car has new changes since: ". date('Y-m-d H:i:s'));
                 
-                if (AutoTraderParser::DISCORD) {
+                if (AutoTraderParser::DISCORD && $car->isFave()) {
                     $this->discord->sendMessage(712787184108830726, null, [
                         'title' => "UPDATED!!! -- " . $car->getTitle(),
                         'description' => "This listing has been updated with new/changed information.",
