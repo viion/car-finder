@@ -89,7 +89,8 @@ class DefaultController extends AbstractController
      */
     public function carHide(Car $car)
     {
-        $car->setHidden(!$car->isHidden());
+        $car->setHidden(!$car->isHidden())
+            ->setNotes("Manually hidden");
     
         $this->em->persist($car);
         $this->em->flush();
