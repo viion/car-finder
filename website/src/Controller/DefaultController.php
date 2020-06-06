@@ -32,27 +32,14 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request)
     {
+        $fave = $request->get('fave', 1) ?: 0;
+        
         $sort = [
-            'default' => [
-                'price' => 'desc',
-                'added' => 'desc',
-            ],
-            'added' => [
-                'added' => 'desc',
-            ],
-            'price' => [
-                'price' => 'desc',
-            ],
-            'score' => [
-                'score' => 'desc',
-            ]
+            'price' => 'desc'
         ];
-    
-        $sortReq = $request->get('sort', 'default');
-        $sort = $sort[$sortReq];
         
         $filter = [
-            'hidden' => false,
+            'fave' => $fave,
         ];
         
         $log = $this->parser->getLog();
@@ -62,7 +49,7 @@ class DefaultController extends AbstractController
         return $this->render('home.html.twig', [
             'cars' => $cars,
             'log' => $log,
-            'sort' => $sortReq
+            'fave' => $fave
         ]);
     }
     
@@ -72,9 +59,7 @@ class DefaultController extends AbstractController
     public function car(Car $car)
     {
         $log = $this->parser->getLog();
-        
-        $car->setSeen(true);
-        
+
         $this->em->persist($car);
         $this->em->flush();
         
@@ -85,17 +70,16 @@ class DefaultController extends AbstractController
     }
     
     /**
-     * @Route("/car/{car}/hidethecar", name="car_hide")
+     * @Route("/car/{car}/favourite", name="car_favourite")
      */
-    public function carHide(Car $car)
+    public function fave(Car $car)
     {
-        $car->setHidden(!$car->isHidden())
-            ->setNotes("Manually hidden");
+        $car->setFave(!$car->isFave());
     
         $this->em->persist($car);
         $this->em->flush();
     
-        return $this->redirectToRoute('home');
+        return $this->json(['true']);
     }
     
     /**

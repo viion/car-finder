@@ -13,17 +13,19 @@ a {
 main, header, footer {
   margin: 20px; }
 
-footer {
-  text-align: center;
-  font-size: 14px;
-  padding: 30px;
-  color: #888; }
-
 header {
   line-height: 22px; }
 
 footer {
-  text-align: left; }
+  font-size: 14px;
+  padding: 30px;
+  color: #888;
+  text-align: left;
+  background-color: #181818;
+  margin: 35px;
+  border-radius: 5px; }
+  footer strong {
+    font-weight: 600; }
   footer ul li {
     padding-left: 15px;
     font-size: 13px;
@@ -184,6 +186,15 @@ footer {
     padding: 10px;
     display: inline-block;
     border-right: solid 1px #555; }
+
+.notice {
+  margin: 15px;
+  padding: 15px;
+  background-color: #AA3333;
+  color: #fff;
+  border-radius: 5px;
+  display: block;
+  width: 100%; }
 
 @media only screen and (max-width: 1500px) {
   .car-list a {

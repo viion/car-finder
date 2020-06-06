@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("console.log('hello');\n\n//# sourceURL=webpack:///./assets/js/app.js?");
+eval("$('.fave').on('click', function (event) {\n  event.preventDefault();\n  var link = $('.fave').attr('href');\n  $.ajax({\n    url: link,\n    success: function success() {\n      location.reload();\n    }\n  });\n});\n\n//# sourceURL=webpack:///./assets/js/app.js?");
 
 /***/ })
 

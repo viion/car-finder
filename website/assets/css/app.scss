@@ -23,19 +23,22 @@ main {
 
 }
 
-footer {
-    text-align: center;
-    font-size: 14px;
-    padding: 30px;
-    color: #888;
-}
-
 header {
     line-height: 22px;
 }
 
 footer {
+    font-size: 14px;
+    padding: 30px;
+    color: #888;
     text-align: left;
+    background-color: #181818;
+    margin: 35px;
+    border-radius: 5px;
+
+    strong {
+        font-weight: 600;
+    }
 
     ul {
         li {
@@ -254,6 +257,16 @@ nav {
         display: inline-block;
         border-right: solid 1px #555;
     }
+}
+
+.notice {
+    margin: 15px;
+    padding: 15px;
+    background-color: #AA3333;
+    color: #fff;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
 }
 
 @media only screen and (max-width: 1500px) {

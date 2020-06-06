@@ -3,14 +3,9 @@
 {% block body %}
     <div class="car-list-bar">
         <span>
-            <strong>Sort:</strong>
-            <a href="{{ path('home', { sort: 'default' }) }}" style="{{ sort == "default" ? "color:#f5e642;" : "" }}">None</a>
-            -
-            <a href="{{ path('home', { sort: 'added' }) }}" style="{{ sort == "added" ? "color:#f5e642;" : "" }}">Added</a>
-            -
-            <a href="{{ path('home', { sort: 'price' }) }}" style="{{ sort == "price" ? "color:#f5e642;" : "" }}">Price</a>
-            -
-            <a href="{{ path('home', { sort: 'score' }) }}" style="{{ sort == "score" ? "color:#f5e642;" : "" }}">Score</a>
+            <a href="{{ path('home', { fave: 1 }) }}" style="{{ fave ? "color:#f5e642;" : "" }}">SHOW FAVE</a>
+            &nbsp;-&nbsp;
+            <a href="{{ path('home', { fave: 0 }) }}" style="{{ not fave ? "color:#f5e642;" : "" }}">SHOW ALL</a>
         </span>
 
         <span>
@@ -28,11 +23,12 @@
                     </span>
                     £{{ car.price|number_format }} <span style="opacity: 0.6;">- {{ car.score }}/100</span>
                 </span>
-                {% if not car.seen %}
-                    <span class="car-new">NEW</span>
-                {% endif %}
                 <img src="{{ image }}">
             </a>
+        {% else %}
+            <div class="notice">
+                No favourite cars
+            </div>
         {% endfor %}
     </div>
 

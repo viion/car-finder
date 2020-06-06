@@ -12,33 +12,42 @@
 
         <br/><br/>
 
-        {% if car.hidden %}
-        <div>
-            This car is hidden from search results and will no longer update!!
+        {% if car.deleted %}
+        <div class="notice">
+            This car has been deleted
         </div>
         {% endif %}
 
         <h1>{{ car.title }}</h1>
         <h2>£ {{ car.price|number_format }}</h2>
 
-        <a class="btn" href="{{ path('car_hide', { car: car.id }) }}">{{ car.hidden ? 'Show' : 'Hide' }} Car</a>
-
-        <br/><br/><br/>
-
-        <h3>AutoTrader Link</h3>
-
-        <a href="https://www.autotrader.co.uk/classified/advert/{{ car.siteId }}" target="_blank" class="at-link">
-            https://www.autotrader.co.uk/classified/advert/{{ car.siteId }}
-        </a>
-
-        <br/><br/><br/>
+        <br>
 
         <h3>Information</h3>
 
         <table class="car-table">
             <tr>
+                <td>Favourite</td>
+                <td>
+                    <a class="btn fave" href="{{ path('car_favourite', { car: car.id }) }}">
+                        {{ car.fave ? 'Unfavourite' : 'Favourite' }} Car
+                    </a>
+                    {% if car.fave %}
+                        &nbsp;&nbsp;&nbsp; This car is one of your favourites!
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <td width="25%">NOTES</td>
                 <td class="car-notes">{{ car.notes ? car.notes : '(none)' }}</td>
+            </tr>
+            <tr>
+                <td>AUTO TRADER</td>
+                <td>
+                    <a href="https://www.autotrader.co.uk/classified/advert/{{ car.siteId }}" target="_blank" class="at-link">
+                        https://www.autotrader.co.uk/classified/advert/{{ car.siteId }}
+                    </a>
+                </td>
             </tr>
             <tr>
                 <td>Description</td>
@@ -92,7 +101,7 @@
             </tr>
         </table>
 
-        <br/><br/><br/>
+        <br/>
 
         <div class="car-images">
             {% for image in car.images %}

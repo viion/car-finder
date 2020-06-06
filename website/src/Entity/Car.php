@@ -11,7 +11,9 @@ use Ramsey\Uuid\Uuid;
  *     name="cars",
  *     indexes={
  *          @ORM\Index(name="site_id", columns={"site_id"}),
- *          @ORM\Index(name="added", columns={"added"})
+ *          @ORM\Index(name="added", columns={"added"}),
+ *          @ORM\Index(name="deleted", columns={"deleted"}),
+ *          @ORM\Index(name="fave", columns={"fave"})
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CarRepository")
@@ -131,22 +133,17 @@ class Car
      * @var bool
      * @ORM\Column(type="boolean", length=10)
      */
-    private $hidden = false;
+    private $deleted = false;
     /**
      * @var bool
      * @ORM\Column(type="boolean", length=10)
      */
-    private $seen = false;
+    private $fave = false;
     /**
      * @var string
      * @ORM\Column(type="text")
      */
     private $notes = '';
-    /**
-     * @var string
-     * @ORM\Column(type="text")
-     */
-    private $previousdata = '';
     
     public function __construct()
     {
@@ -190,18 +187,6 @@ class Car
     public function getHash(): string
     {
         return $this->hash;
-    }
-    
-    public function getPreviousdata(): string
-    {
-        return json_decode($this->previousdata);
-    }
-    
-    public function setPreviousdata(string $previousdata)
-    {
-        $this->previousdata = $previousdata;
-        
-        return $this;
     }
     
     public function getId(): string
@@ -454,30 +439,6 @@ class Car
         return $this;
     }
     
-    public function isHidden(): bool
-    {
-        return $this->hidden;
-    }
-    
-    public function setHidden(bool $hidden)
-    {
-        $this->hidden = $hidden;
-        
-        return $this;
-    }
-    
-    public function isSeen(): bool
-    {
-        return $this->seen;
-    }
-    
-    public function setSeen(bool $seen)
-    {
-        $this->seen = $seen;
-        
-        return $this;
-    }
-    
     public function getNotes(): string
     {
         return $this->notes;
@@ -486,6 +447,30 @@ class Car
     public function setNotes(string $notes)
     {
         $this->notes = $notes;
+        
+        return $this;
+    }
+    
+    public function isDeleted(): bool
+    {
+        return $this->deleted;
+    }
+    
+    public function setDeleted(bool $deleted)
+    {
+        $this->deleted = $deleted;
+        
+        return $this;
+    }
+    
+    public function isFave(): bool
+    {
+        return $this->fave;
+    }
+    
+    public function setFave(bool $fave)
+    {
+        $this->fave = $fave;
         
         return $this;
     }

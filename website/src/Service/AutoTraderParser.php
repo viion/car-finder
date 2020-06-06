@@ -203,7 +203,7 @@ class AutoTraderParser extends HttpService
     
             if ($response->code != 200) {
                 $car->setNotes('Car hidden/removed as it did not return 200 response, which might mean its listing has been removed')
-                    ->setHidden(true);
+                    ->setDeleted(true);
                 
                 $this->em->persist($car);
                 $this->em->flush();
@@ -211,7 +211,7 @@ class AutoTraderParser extends HttpService
             }
         } catch (\Exception $ex) {
             $car->setNotes('Car hidden/removed as it did not return 200 response, which might mean its listing has been removed')
-                ->setHidden(true);
+                ->setDeleted(true);
             
             $this->em->persist($car);
             $this->em->flush();

@@ -34,15 +34,15 @@ class AutoTraderUpdater extends HttpService
     
     public function update()
     {
-        // Find all non hidden cars
-        $cars = $this->repository->findBy(['hidden' => false]);
+        // Find all fave characters
+        $cars = $this->repository->findBy([
+            'deleted' => false,
+            'fave' => true
+        ]);
         
         /** @var Car $car */
         foreach ($cars as $car) {
             $id = $car->getSiteId();
-    
-            // set old car data
-            $car->setPreviousdata(\GuzzleHttp\json_encode($car->toArray()));
     
             // grab the old hash
             $lastHash = $car->getHash();
@@ -53,12 +53,10 @@ class AutoTraderUpdater extends HttpService
             // grab the new hash
             $newHash = $car->getHash();
             
-            // save car
-            $this->em->persist($car);
-            $this->em->flush();
-    
-            if ($lastHash != $newHash && !$car->isHidden()) {
+            if ($lastHash != $newHash && !$car->isDeleted()) {
                 $this->console->writeln("!!! New Changes!");
+                
+                $car->setNotes("Car has new changes since: ". date('Y-m-d H:i:s'));
                 
                 if (AutoTraderParser::DISCORD) {
                     $this->discord->sendMessage(712787184108830726, null, [
@@ -87,6 +85,10 @@ class AutoTraderUpdater extends HttpService
         
                 $this->console->writeln("Car: {$car->getTitle()} has been updated");
             }
+    
+            // save car
+            $this->em->persist($car);
+            $this->em->flush();
         }
     }
 }
