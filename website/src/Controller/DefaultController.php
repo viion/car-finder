@@ -40,6 +40,7 @@ class DefaultController extends AbstractController
         
         $filter = [
             'fave' => $fave,
+            'deleted' => false,
         ];
         
         $log = $this->parser->getLog();
