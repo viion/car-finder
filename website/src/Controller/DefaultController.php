@@ -33,6 +33,7 @@ class DefaultController extends AbstractController
     public function index(Request $request)
     {
         $fave = $request->get('fave', 1) ?: 0;
+        $deleted = $request->get('deleted', 0) ?: 0;
         
         $sort = [
             'price' => 'desc'
@@ -42,6 +43,12 @@ class DefaultController extends AbstractController
             'fave' => $fave,
             'deleted' => false,
         ];
+        
+        if ($deleted) {
+            $filter = [
+                'deleted' => true
+            ];
+        }
         
         $log = $this->parser->getLog();
         

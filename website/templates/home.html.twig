@@ -6,6 +6,8 @@
             <a href="{{ path('home', { fave: 1 }) }}" style="{{ fave ? "color:#f5e642;" : "" }}">SHOW FAVE</a>
             &nbsp;-&nbsp;
             <a href="{{ path('home', { fave: 0 }) }}" style="{{ not fave ? "color:#f5e642;" : "" }}">SHOW ALL</a>
+            &nbsp;-&nbsp;
+            <a href="{{ path('home', { deleted: 1 }) }}">SHOW DELETED</a>
         </span>
 
         <span>
