@@ -82,7 +82,8 @@ class DefaultController extends AbstractController
      */
     public function fave(Car $car)
     {
-        $car->setFave(!$car->isFave());
+        $car->setFave(!$car->isFave())
+            ->setNotes('Fave manually set');
     
         $this->em->persist($car);
         $this->em->flush();
