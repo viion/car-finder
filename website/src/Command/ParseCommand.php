@@ -29,8 +29,14 @@ class ParseCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->autoTraderParser->parse(
-            $input->getArgument('page')
-        );
+        try {
+            $this->autoTraderParser->parse(
+                $input->getArgument('page')
+            );
+        } catch (\Exception $ex) {
+            $output->writeln("Error: {$ex->getMessage()}");
+            file_put_contents(__DIR__.'/ParseCommand.txt', "Error: {$ex->getMessage()} \n", FILE_APPEND);
+        }
+        
     }
 }

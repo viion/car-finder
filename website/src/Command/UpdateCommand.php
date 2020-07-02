@@ -31,7 +31,8 @@ class UpdateCommand extends Command
         try {
             $this->autoTraderUpdater->update();
         } catch (\Exception $ex) {
-            file_put_contents(__DIR__.'/log.txt', "Error: {$ex->getMessage()} \n", FILE_APPEND);
+            $output->writeln("Error: {$ex->getMessage()}");
+            file_put_contents(__DIR__.'/UpdateCommand.txt', "Error: {$ex->getMessage()} \n", FILE_APPEND);
         }
     }
 }
