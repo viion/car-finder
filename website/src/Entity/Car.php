@@ -144,6 +144,11 @@ class Car
      * @ORM\Column(type="text")
      */
     private $notes = '';
+    /**
+     * var array
+     * @ORM\Column(type="array")
+     */
+    private $history = [];
     
     public function __construct()
     {
@@ -471,6 +476,25 @@ class Car
     public function setFave(bool $fave)
     {
         $this->fave = $fave;
+        
+        return $this;
+    }
+    
+    public function getHistory()
+    {
+        return $this->history;
+    }
+    
+    public function setHistory($history)
+    {
+        $this->history = $history;
+        
+        return $this;
+    }
+    
+    public function addHistory($history)
+    {
+        $this->history[] = $history;
         
         return $this;
     }

@@ -99,6 +99,20 @@
                     </small>
                 </td>
             </tr>
+            <tr>
+                <td>Changes</td>
+                <td>
+                    {% for change in car.history|reverse %}
+                    <p>Changes: {{ change.date|date('F j, Y, g:i a') }}</p>
+
+                    <ul>
+                        {% for line in change.changes %}
+                        <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </td>
+            </tr>
         </table>
 
         <br/>

@@ -59,11 +59,15 @@ class AutoTraderUpdater extends HttpService
                 
                 $this->console->writeln("!!! New Changes!");
                 $car->setNotes("Car has new changes since: ". date('Y-m-d H:i:s'));
+                $car->addHistory([
+                    'date' => time(),
+                    'changes' => $changes
+                ]);
                 
                 if (AutoTraderParser::DISCORD && $car->isFave()) {
                     $this->discord->sendMessage(712787184108830726, null, [
                         'title' => "UPDATED!!! -- " . $car->getTitle(),
-                        'description' => $changes,
+                        'description' => "Check page for changes.",
                         'url' => "http://tts.viion.co.uk/car/{$car->getId()}",
                         'color' => hexdec('75f542'),
                         'image' => [
@@ -81,11 +85,12 @@ class AutoTraderUpdater extends HttpService
                                 'inline' => true,
                             ],
                         ]
-                    ]
-                    );
+                    ]);
                 }
         
                 $this->console->writeln("Car: {$car->getTitle()} has been updated");
+                
+                
             }
     
             // save car
