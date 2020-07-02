@@ -28,6 +28,10 @@ class UpdateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->autoTraderUpdater->update();
+        try {
+            $this->autoTraderUpdater->update();
+        } catch (\Exception $ex) {
+            file_put_contents(__DIR__.'/log.txt', "Error: {$ex->getMessage()} \n", FILE_APPEND);
+        }
     }
 }

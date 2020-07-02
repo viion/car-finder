@@ -100,7 +100,7 @@ class AutoTraderUpdater extends HttpService
         
         $check = [
             'title',
-            'description',
+            //'description',
             'price',
             'priceValuation',
             'year',
@@ -126,6 +126,10 @@ class AutoTraderUpdater extends HttpService
         
         if (count($carOld['images']) != count($carNew['images'])) {
             $changes[] = "New Images";
+        }
+        
+        if ($carOld['description'] != $carNew['description']) {
+            $changes[] = "Description Changes (too big to post)";
         }
         
         return implode("\n\n", $changes);
