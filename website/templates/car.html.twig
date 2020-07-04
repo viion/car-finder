@@ -104,12 +104,9 @@
                 <td>
                     {% for change in car.history|reverse %}
                     <p>Changes: {{ change.date|date('F j, Y, g:i a') }}</p>
-
-                    <ul>
-                        {% for line in change.changes %}
-                        <li>{{ line }}</li>
-                        {% endfor %}
-                    </ul>
+                    <div>
+                        <small>{{ change.changes }}</small>
+                    </div>
                     {% else %}
                     <em>No recorded changes at this time.</em>
                     {% endfor %}
